@@ -13,7 +13,7 @@ type HealthBlindInfo struct {
 type WristbandInfo struct {
 	DataId    string `json:"data_id"`
 	DeviceNo  string `json:"device_no"`
-	HeartRate uint8  `json:"heart_rate"`
+	HeartRate uint16 `json:"heart_rate"`
 	DataTime  string `json:"data_time"`
 }
 

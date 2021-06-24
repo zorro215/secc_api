@@ -16,7 +16,9 @@ func CallMethod(method string, args ...interface{}) {
 
 	//decodeString,err:= types.H(json1)
 	c, err := types.NewCall(meta, method, args...)
-
+	if err != nil {
+		panic(err)
+	}
 	// Create the extrinsic
 	ext := types.NewExtrinsic(c)
 
