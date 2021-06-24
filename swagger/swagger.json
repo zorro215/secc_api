@@ -335,7 +335,6 @@
                     "wristband"
                 ],
                 "description": "create wristband",
-                "operationId": "WristbandController.Create",
                 "parameters": [
                     {
                         "in": "body",
@@ -357,13 +356,39 @@
                 }
             }
         },
+        "/wristband/{bind}": {
+            "post": {
+                "tags": [
+                    "wristband"
+                ],
+                "description": "bind user info",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "The bindIndo content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.HealthBindInfoDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
         "/wristband/{deviceId}": {
             "get": {
                 "tags": [
                     "wristband"
                 ],
                 "description": "find wristband by deviceId",
-                "operationId": "WristbandController.Get",
                 "parameters": [
                     {
                         "in": "path",
@@ -385,6 +410,42 @@
         }
     },
     "definitions": {
+        "models.HealthBindInfoDTO": {
+            "title": "HealthBindInfoDTO",
+            "type": "object",
+            "properties": {
+                "BindInfo": {
+                    "$ref": "#/definitions/models.HealthBlindInfo"
+                },
+                "RelationType": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "models.HealthBlindInfo": {
+            "title": "HealthBlindInfo",
+            "type": "object",
+            "properties": {
+                "chronic": {
+                    "type": "string"
+                },
+                "height": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "id_card": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "weight": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
         "models.Object": {
             "title": "Object",
             "type": "object",
@@ -446,6 +507,9 @@
                     "type": "string",
                     "format": "datetime"
                 },
+                "DataId": {
+                    "type": "string"
+                },
                 "DataTime": {
                     "type": "string"
                 },
@@ -453,16 +517,12 @@
                     "type": "string",
                     "format": "datetime"
                 },
-                "DeviceId": {
+                "DeviceNo": {
                     "type": "string"
                 },
                 "HeartRate": {
                     "type": "integer",
-                    "format": "int64"
-                },
-                "Id": {
-                    "type": "integer",
-                    "format": "int64"
+                    "format": "int32"
                 },
                 "UpdatedAt": {
                     "type": "string",
@@ -474,7 +534,7 @@
     "tags": [
         {
             "name": "wristband",
-            "description": "Operations about wristband\n"
+            "description": "WristbandController Operations about wristband\n"
         },
         {
             "name": "object",

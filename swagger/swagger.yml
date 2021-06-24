@@ -223,7 +223,6 @@ paths:
       tags:
       - wristband
       description: create wristband
-      operationId: WristbandController.Create
       parameters:
       - in: body
         name: body
@@ -236,12 +235,28 @@ paths:
           description: ""
         "403":
           description: body is empty
+  /wristband/{bind}:
+    post:
+      tags:
+      - wristband
+      description: bind user info
+      parameters:
+      - in: body
+        name: body
+        description: The bindIndo content
+        required: true
+        schema:
+          $ref: '#/definitions/models.HealthBindInfoDTO'
+      responses:
+        "200":
+          description: ""
+        "403":
+          description: body is empty
   /wristband/{deviceId}:
     get:
       tags:
       - wristband
       description: find wristband by deviceId
-      operationId: WristbandController.Get
       parameters:
       - in: path
         name: deviceId
@@ -254,6 +269,31 @@ paths:
         "403":
           description: :deviceId is empty
 definitions:
+  models.HealthBindInfoDTO:
+    title: HealthBindInfoDTO
+    type: object
+    properties:
+      BindInfo:
+        $ref: '#/definitions/models.HealthBlindInfo'
+      RelationType:
+        type: integer
+        format: int32
+  models.HealthBlindInfo:
+    title: HealthBlindInfo
+    type: object
+    properties:
+      chronic:
+        type: string
+      height:
+        type: integer
+        format: int32
+      id_card:
+        type: string
+      name:
+        type: string
+      weight:
+        type: integer
+        format: int32
   models.Object:
     title: Object
     type: object
@@ -297,26 +337,25 @@ definitions:
       CreatedAt:
         type: string
         format: datetime
+      DataId:
+        type: string
       DataTime:
         type: string
       DeletedAt:
         type: string
         format: datetime
-      DeviceId:
+      DeviceNo:
         type: string
       HeartRate:
         type: integer
-        format: int64
-      Id:
-        type: integer
-        format: int64
+        format: int32
       UpdatedAt:
         type: string
         format: datetime
 tags:
 - name: wristband
   description: |
-    Operations about wristband
+    WristbandController Operations about wristband
 - name: object
   description: |
     Operations about object
