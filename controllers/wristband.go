@@ -22,12 +22,13 @@ type WristbandController struct {
 // @router / [post]
 func (o *WristbandController) Post() {
 	paramData := o.Ctx.Input.RequestBody
-	w := models.Wristband{}
+	var w models.Wristband
 	err := json.Unmarshal(paramData, &w)
 	if err != nil {
 		fmt.Println("json.Unmarshal is err:", err.Error())
+	} else {
+		service.AddWristband(w)
 	}
-	//service.AddWristband(w)
 }
 
 // Get @Title Get
