@@ -9,12 +9,12 @@ import (
 	beego "github.com/beego/beego/v2/server/web"
 )
 
-// Operations about wristband
+// WristbandController Operations about wristband
 type WristbandController struct {
 	beego.Controller
 }
 
-// @Title Create
+// Post @Title Create
 // @Description create wristband
 // @Param	body		body 	models.Wristband true		"The wristband content"
 // @Success 200
@@ -30,7 +30,7 @@ func (o *WristbandController) Post() {
 	//service.AddWristband(w)
 }
 
-// @Title Get
+// Get @Title Get
 // @Description find wristband by deviceId
 // @Param	deviceId		path 	string	true		"the deviceId you want to get"
 // @Success 200 {wristband} models.Object
@@ -41,4 +41,20 @@ func (o *WristbandController) Get() {
 	info := service.QueryWristband(deviceId)
 	o.Data["json"] = info
 	_ = o.ServeJSON()
+}
+
+// Bind @Title Bind
+// @Description bind user info
+// @Param	body		body 	models.HealthBindInfoDTO true		"The bindIndo content"
+// @Success 200
+// @Failure 403 body is empty
+// @router /:bind [post]
+func (o *WristbandController) Bind() {
+	paramData := o.Ctx.Input.RequestBody
+	w := models.HealthBindInfoDTO{}
+	err := json.Unmarshal(paramData, &w)
+	if err != nil {
+		fmt.Println("json.Unmarshal is err:", err.Error())
+	}
+	service.BindUserInfo(w)
 }

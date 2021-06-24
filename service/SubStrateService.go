@@ -1,6 +1,7 @@
 package service
 
 import (
+	"fmt"
 	grpc "github.com/centrifuge/go-substrate-rpc-client/v3"
 	"github.com/centrifuge/go-substrate-rpc-client/v3/signature"
 	"github.com/centrifuge/go-substrate-rpc-client/v3/types"
@@ -14,7 +15,7 @@ func CallMethod(method string, args ...interface{}) {
 	meta, err := api.RPC.State.GetMetadataLatest()
 
 	//decodeString,err:= types.H(json1)
-	c, err := types.NewCall(meta, method, args)
+	c, err := types.NewCall(meta, method, args...)
 
 	// Create the extrinsic
 	ext := types.NewExtrinsic(c)
@@ -60,4 +61,6 @@ func CallMethod(method string, args ...interface{}) {
 	if err != nil {
 		panic(err)
 	}
+	fmt.Printf("data info =%v", c)
+
 }
