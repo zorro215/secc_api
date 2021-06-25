@@ -29,13 +29,8 @@ func (o *SleepSignController) Post() {
 	} else {
 		service.AddSleepSign(ss)
 	}
-	var ssd models.SleepSign
-	err2 := json.Unmarshal(paramData, &ssd)
-	if err2 != nil {
-		fmt.Println("json.Unmarshal is err2:", err2.Error())
-	} else {
-		service.AddSleepSign(ssd)
-	}
+	ssd := models.ConvertSleepSignInfo(ss)
+	service.SaveSleepSignInfo(ssd)
 }
 
 // Get @Title Get

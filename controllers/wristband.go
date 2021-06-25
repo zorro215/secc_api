@@ -29,13 +29,8 @@ func (o *WristbandController) Post() {
 	} else {
 		service.AddWristband(w)
 	}
-	var wd models.WristbandInfo
-	err2 := json.Unmarshal(paramData, &wd)
-	if err2 != nil {
-		fmt.Println("json.Unmarshal is err2:", err2.Error())
-	} else {
-		service.SaveWristbandInfo(wd)
-	}
+	wd := models.ConvertWristbandInfo(w)
+	service.SaveWristbandInfo(wd)
 }
 
 // Get @Title Get

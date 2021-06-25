@@ -12,3 +12,7 @@ type SleepReport struct {
 	UpdatedAt  time.Time `xorm:"updated"`
 	DeletedAt  time.Time `xorm:"deleted"`
 }
+
+func ConvertSleepReportInfo(sleepReport SleepReport) SleepReportInfo {
+	return SleepReportInfo{DataId: sleepReport.DataId, DeviceNo: sleepReport.DeviceNo, DeepSleep: sleepReport.DeepSleep, LightSleep: sleepReport.LightSleep, DataTime: sleepReport.DataTime}
+}

@@ -11,3 +11,7 @@ type Wristband struct {
 	UpdatedAt time.Time `xorm:"updated"`
 	DeletedAt time.Time `xorm:"deleted"`
 }
+
+func ConvertWristbandInfo(wristband Wristband) WristbandInfo {
+	return WristbandInfo{DataId: wristband.DataId, DeviceNo: wristband.DeviceNo, HeartRate: wristband.HeartRate, DataTime: wristband.DataTime}
+}

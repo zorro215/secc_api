@@ -7,6 +7,24 @@ import (
 
 func init() {
 
+	beego.GlobalControllerRouter["secc_api/controllers:MedicalController"] = append(beego.GlobalControllerRouter["secc_api/controllers:MedicalController"],
+		beego.ControllerComments{
+			Method:           "Post",
+			Router:           "/",
+			AllowHTTPMethods: []string{"post"},
+			MethodParams:     param.Make(),
+			Filters:          nil,
+			Params:           nil})
+
+	beego.GlobalControllerRouter["secc_api/controllers:MedicalController"] = append(beego.GlobalControllerRouter["secc_api/controllers:MedicalController"],
+		beego.ControllerComments{
+			Method:           "Get",
+			Router:           "/:deviceNo",
+			AllowHTTPMethods: []string{"get"},
+			MethodParams:     param.Make(),
+			Filters:          nil,
+			Params:           nil})
+
 	beego.GlobalControllerRouter["secc_api/controllers:ObjectController"] = append(beego.GlobalControllerRouter["secc_api/controllers:ObjectController"],
 		beego.ControllerComments{
 			Method:           "Post",
@@ -48,6 +66,42 @@ func init() {
 			Method:           "Delete",
 			Router:           "/:objectId",
 			AllowHTTPMethods: []string{"delete"},
+			MethodParams:     param.Make(),
+			Filters:          nil,
+			Params:           nil})
+
+	beego.GlobalControllerRouter["secc_api/controllers:SleepReportController"] = append(beego.GlobalControllerRouter["secc_api/controllers:SleepReportController"],
+		beego.ControllerComments{
+			Method:           "Post",
+			Router:           "/",
+			AllowHTTPMethods: []string{"post"},
+			MethodParams:     param.Make(),
+			Filters:          nil,
+			Params:           nil})
+
+	beego.GlobalControllerRouter["secc_api/controllers:SleepReportController"] = append(beego.GlobalControllerRouter["secc_api/controllers:SleepReportController"],
+		beego.ControllerComments{
+			Method:           "Get",
+			Router:           "/:deviceNo",
+			AllowHTTPMethods: []string{"get"},
+			MethodParams:     param.Make(),
+			Filters:          nil,
+			Params:           nil})
+
+	beego.GlobalControllerRouter["secc_api/controllers:SleepSignController"] = append(beego.GlobalControllerRouter["secc_api/controllers:SleepSignController"],
+		beego.ControllerComments{
+			Method:           "Post",
+			Router:           "/",
+			AllowHTTPMethods: []string{"post"},
+			MethodParams:     param.Make(),
+			Filters:          nil,
+			Params:           nil})
+
+	beego.GlobalControllerRouter["secc_api/controllers:SleepSignController"] = append(beego.GlobalControllerRouter["secc_api/controllers:SleepSignController"],
+		beego.ControllerComments{
+			Method:           "Get",
+			Router:           "/:deviceNo",
+			AllowHTTPMethods: []string{"get"},
 			MethodParams:     param.Make(),
 			Filters:          nil,
 			Params:           nil})

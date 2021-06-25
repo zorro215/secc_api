@@ -29,13 +29,8 @@ func (o *SleepReportController) Post() {
 	} else {
 		service.AddSleepReport(sr)
 	}
-	var srd models.SleepReportInfo
-	err2 := json.Unmarshal(paramData, &srd)
-	if err2 != nil {
-		fmt.Println("json.Unmarshal is err2:", err2.Error())
-	} else {
-		service.SaveSleepReportInfo(srd)
-	}
+	srd := models.ConvertSleepReportInfo(sr)
+	service.SaveSleepReportInfo(srd)
 }
 
 // Get @Title Get

@@ -12,3 +12,7 @@ type SleepSign struct {
 	UpdatedAt  time.Time `xorm:"updated"`
 	DeletedAt  time.Time `xorm:"deleted"`
 }
+
+func ConvertSleepSignInfo(sleepSign SleepSign) SleepSignInfo {
+	return SleepSignInfo{DataId: sleepSign.DataId, DeviceNo: sleepSign.DeviceNo, HeartRate: sleepSign.HeartRate, BreathRate: sleepSign.BreathRate, DataTime: sleepSign.DataTime}
+}
