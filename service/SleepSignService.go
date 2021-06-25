@@ -5,9 +5,9 @@ import (
 	"secc_api/tools"
 )
 
-func QueryWristband(deviceNo string) []models.Wristband {
+func QuerySleepSign(deviceNo string) []models.SleepSign {
 	engine := tools.QueryEngine()
-	applies := make([]models.Wristband, 0)
+	applies := make([]models.SleepSign, 0)
 	where := engine.In("data_time", tools.GetWeekStr()).OrderBy("data_time")
 	if deviceNo != "" {
 		where.And("device_no = ?", deviceNo)
@@ -16,7 +16,7 @@ func QueryWristband(deviceNo string) []models.Wristband {
 	return applies
 }
 
-func AddWristband(w models.Wristband) {
+func AddSleepSign(w models.SleepSign) {
 	engine := tools.QueryEngine()
 	_, _ = engine.InsertOne(w)
 }

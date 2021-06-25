@@ -20,6 +20,21 @@ func init() {
 				&controllers.WristbandController{},
 			),
 		),
+		beego.NSNamespace("/sleep/sign",
+			beego.NSInclude(
+				&controllers.SleepSignController{},
+			),
+		),
+		beego.NSNamespace("/sleep/report",
+			beego.NSInclude(
+				&controllers.SleepReportController{},
+			),
+		),
+		beego.NSNamespace("/medical",
+			beego.NSInclude(
+				&controllers.MedicalController{},
+			),
+		),
 		beego.NSNamespace("/object",
 			beego.NSInclude(
 				&controllers.ObjectController{},

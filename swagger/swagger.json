@@ -15,6 +15,58 @@
     },
     "basePath": "/v1",
     "paths": {
+        "/medical/": {
+            "post": {
+                "tags": [
+                    "medical"
+                ],
+                "description": "create medical",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "The medical content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Medical"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/medical/{deviceNo}": {
+            "get": {
+                "tags": [
+                    "medical"
+                ],
+                "description": "find medical by deviceNo",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deviceNo",
+                        "description": "the deviceNo you want to get",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{medical} models.Object"
+                    },
+                    "403": {
+                        "description": ":deviceNo is empty"
+                    }
+                }
+            }
+        },
         "/object/": {
             "get": {
                 "tags": [
@@ -146,6 +198,110 @@
                     },
                     "403": {
                         "description": "objectId is empty"
+                    }
+                }
+            }
+        },
+        "/sleep/report/": {
+            "post": {
+                "tags": [
+                    "sleep/report"
+                ],
+                "description": "create sleep_report",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "The sleep_report content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.SleepReport"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/sleep/report/{deviceNo}": {
+            "get": {
+                "tags": [
+                    "sleep/report"
+                ],
+                "description": "find sleep_report by deviceNo",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deviceNo",
+                        "description": "the deviceNo you want to get",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{sleep_report} models.Object"
+                    },
+                    "403": {
+                        "description": ":deviceNo is empty"
+                    }
+                }
+            }
+        },
+        "/sleep/sign/": {
+            "post": {
+                "tags": [
+                    "sleep/sign"
+                ],
+                "description": "create sleep_sign",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "The sleep_sign content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.SleepSign"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/sleep/sign/{deviceNo}": {
+            "get": {
+                "tags": [
+                    "sleep/sign"
+                ],
+                "description": "find sleep_sign by deviceNo",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "deviceNo",
+                        "description": "the deviceNo you want to get",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{sleep_sign} models.Object"
+                    },
+                    "403": {
+                        "description": ":deviceNo is empty"
                     }
                 }
             }
@@ -356,44 +512,17 @@
                 }
             }
         },
-        "/wristband/{bind}": {
-            "post": {
-                "tags": [
-                    "wristband"
-                ],
-                "description": "bind user info",
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "The bindIndo content",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.HealthBindInfoDTO"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": ""
-                    },
-                    "403": {
-                        "description": "body is empty"
-                    }
-                }
-            }
-        },
-        "/wristband/{deviceId}": {
+        "/wristband/{deviceNo}": {
             "get": {
                 "tags": [
                     "wristband"
                 ],
-                "description": "find wristband by deviceId",
+                "description": "find wristband by deviceNo",
                 "parameters": [
                     {
                         "in": "path",
-                        "name": "deviceId",
-                        "description": "the deviceId you want to get",
+                        "name": "deviceNo",
+                        "description": "the deviceNo you want to get",
                         "required": true,
                         "type": "string"
                     }
@@ -403,46 +532,37 @@
                         "description": "{wristband} models.Object"
                     },
                     "403": {
-                        "description": ":deviceId is empty"
+                        "description": ":deviceNo is empty"
                     }
                 }
             }
         }
     },
     "definitions": {
-        "models.HealthBindInfoDTO": {
-            "title": "HealthBindInfoDTO",
+        "models.Medical": {
+            "title": "Medical",
             "type": "object",
             "properties": {
-                "BindInfo": {
-                    "$ref": "#/definitions/models.HealthBlindInfo"
+                "CreatedAt": {
+                    "type": "string",
+                    "format": "datetime"
                 },
-                "RelationType": {
-                    "type": "integer",
-                    "format": "int32"
-                }
-            }
-        },
-        "models.HealthBlindInfo": {
-            "title": "HealthBlindInfo",
-            "type": "object",
-            "properties": {
-                "chronic": {
+                "DataId": {
                     "type": "string"
                 },
-                "height": {
-                    "type": "integer",
-                    "format": "int32"
+                "DeletedAt": {
+                    "type": "string",
+                    "format": "datetime"
                 },
-                "id_card": {
+                "FileHash": {
                     "type": "string"
                 },
-                "name": {
+                "IdCard": {
                     "type": "string"
                 },
-                "weight": {
-                    "type": "integer",
-                    "format": "int32"
+                "UpdatedAt": {
+                    "type": "string",
+                    "format": "datetime"
                 }
             }
         },
@@ -478,6 +598,76 @@
                 },
                 "Gender": {
                     "type": "string"
+                }
+            }
+        },
+        "models.SleepReport": {
+            "title": "SleepReport",
+            "type": "object",
+            "properties": {
+                "CreatedAt": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "DataId": {
+                    "type": "string"
+                },
+                "DataTime": {
+                    "type": "string"
+                },
+                "DeepSleep": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "DeletedAt": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "DeviceNo": {
+                    "type": "string"
+                },
+                "LightSleep": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "UpdatedAt": {
+                    "type": "string",
+                    "format": "datetime"
+                }
+            }
+        },
+        "models.SleepSign": {
+            "title": "SleepSign",
+            "type": "object",
+            "properties": {
+                "BreathRate": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "CreatedAt": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "DataId": {
+                    "type": "string"
+                },
+                "DataTime": {
+                    "type": "string"
+                },
+                "DeletedAt": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "DeviceNo": {
+                    "type": "string"
+                },
+                "HeartRate": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "UpdatedAt": {
+                    "type": "string",
+                    "format": "datetime"
                 }
             }
         },
@@ -535,6 +725,18 @@
         {
             "name": "wristband",
             "description": "WristbandController Operations about wristband\n"
+        },
+        {
+            "name": "sleep/sign",
+            "description": "SleepSignController Operations about sleep_sign\n"
+        },
+        {
+            "name": "sleep/report",
+            "description": "SleepReportController Operations about sleep_report\n"
+        },
+        {
+            "name": "medical",
+            "description": "MedicalController Operations about medical\n"
         },
         {
             "name": "object",

@@ -126,17 +126,8 @@ func init() {
 
 	beego.GlobalControllerRouter["secc_api/controllers:WristbandController"] = append(beego.GlobalControllerRouter["secc_api/controllers:WristbandController"],
 		beego.ControllerComments{
-			Method:           "Bind",
-			Router:           "/:bind",
-			AllowHTTPMethods: []string{"post"},
-			MethodParams:     param.Make(),
-			Filters:          nil,
-			Params:           nil})
-
-	beego.GlobalControllerRouter["secc_api/controllers:WristbandController"] = append(beego.GlobalControllerRouter["secc_api/controllers:WristbandController"],
-		beego.ControllerComments{
 			Method:           "Get",
-			Router:           "/:deviceId",
+			Router:           "/:deviceNo",
 			AllowHTTPMethods: []string{"get"},
 			MethodParams:     param.Make(),
 			Filters:          nil,

@@ -23,8 +23,8 @@ func GetSQLUrl() string {
 func QueryEngine() *xorm.Engine {
 	var err error
 	var engine *xorm.Engine
-	tableprefix, _ := beego.AppConfig.String("table.prefix")
-	mapper := core.NewPrefixMapper(core.SnakeMapper{}, tableprefix)
+	tablePrefix, _ := beego.AppConfig.String("table.prefix")
+	mapper := core.NewPrefixMapper(core.SnakeMapper{}, tablePrefix)
 	engine, err = xorm.NewEngine("mysql", GetSQLUrl())
 	if err != nil {
 		panic("get database connection fail")
