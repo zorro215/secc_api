@@ -4,6 +4,7 @@ import (
 	beego "github.com/beego/beego/v2/server/web"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/go-xorm/xorm"
+	"secc_api/models"
 	"xorm.io/core"
 )
 
@@ -29,6 +30,7 @@ func QueryEngine() *xorm.Engine {
 		panic("get database connection fail")
 	}
 	//日志是一个接口，通过设置日志，可以显示SQL，警告以及错误等，默认的显示级别为INFO
+	_ = engine.Sync2(new(models.Wristband), new(models.Medical), new(models.SleepReport), new(models.SleepSign))
 	engine.ShowSQL(true)
 	engine.SetTableMapper(mapper)
 	engine.Logger().SetLevel(core.LOG_DEBUG)
