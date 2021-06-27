@@ -25,6 +25,15 @@ func init() {
 			Filters:          nil,
 			Params:           nil})
 
+	beego.GlobalControllerRouter["secc_api/controllers:MedicalController"] = append(beego.GlobalControllerRouter["secc_api/controllers:MedicalController"],
+		beego.ControllerComments{
+			Method:           "UploadFile",
+			Router:           "/UploadFile",
+			AllowHTTPMethods: []string{"post"},
+			MethodParams:     param.Make(),
+			Filters:          nil,
+			Params:           nil})
+
 	beego.GlobalControllerRouter["secc_api/controllers:ObjectController"] = append(beego.GlobalControllerRouter["secc_api/controllers:ObjectController"],
 		beego.ControllerComments{
 			Method:           "Post",

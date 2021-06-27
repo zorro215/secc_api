@@ -1,12 +1,9 @@
 package tools
 
 import (
+	"bytes"
 	"fmt"
 	beego "github.com/beego/beego/v2/server/web"
-	"io/ioutil"
-	"os"
-	"strings"
-
 	shell "github.com/ipfs/go-ipfs-api"
 )
 
@@ -19,37 +16,14 @@ func getUri() string {
 	return ipfsHost + ":" + ipfsPort
 }
 
-//ipfs 上传字符串
-func AddString(str string) {
+func UploadToIpfs(buffer []byte) (string, string, error) {
 	sh := shell.NewShell(getUri())
-	cid, err := sh.Add(strings.NewReader(str))
-	if err != nil {
-		_, _ = fmt.Fprintf(os.Stderr, "error: %s", err)
-		os.Exit(1)
+	ipfsHash, err := sh.Add(bytes.NewReader(buffer))
+	if err != nil && len(ipfsHash) == 0 {
+		fmt.Println("上传到ipfs失败", err)
+		return "", "", err
 	}
-	fmt.Printf("added %s", cid)
-}
-
-//ipfs 上传文件
-func AddFile(path string) {
-	sh := shell.NewShell(getUri())
-	cid, err := sh.AddDir(path)
-	if err != nil {
-		_, _ = fmt.Fprintf(os.Stderr, "error: %s", err)
-		os.Exit(1)
-	}
-	fmt.Printf("added %s", cid)
-}
-
-func Cat(examplesHash string) {
-	sh := shell.NewShell(getUri())
-	rc, err := sh.Cat(examplesHash)
-	if err != nil {
-		fmt.Println(err.Error())
-	}
-	body, err := ioutil.ReadAll(rc)
-	if err != nil {
-		fmt.Println(err.Error())
-	}
-	fmt.Println("cat:", string(body))
+	ipfsVisitUrl, _ := beego.AppConfig.String("ipfs.visitUrl")
+	ipfsUrl := ipfsVisitUrl + ipfsHash
+	return ipfsHash, ipfsUrl, err
 }
