@@ -5,12 +5,12 @@ import (
 	"secc_api/tools"
 )
 
-func QueryMedical(deviceNo string) []models.Medical {
+func QueryMedical(idCard string) []models.Medical {
 	engine := tools.QueryEngine()
 	applies := make([]models.Medical, 0)
-	where := engine.In("data_time", tools.GetWeekStr()).OrderBy("data_time")
-	if deviceNo != "" {
-		where.And("device_no = ?", deviceNo)
+	where := engine.Where("1=1")
+	if idCard != "" {
+		where.And("id_card = ?", idCard)
 	}
 	_ = where.Find(&applies)
 	return applies

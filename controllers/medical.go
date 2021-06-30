@@ -50,4 +50,6 @@ func (o *MedicalController) UploadFile() {
 	service.AddMedical(m)
 	md := models.ConvertMedicalInfo(m)
 	service.SaveMedicalInfo(md)
+	o.Data["json"] = m
+	_ = o.ServeJSON()
 }
