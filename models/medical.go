@@ -10,3 +10,7 @@ type Medical struct {
 	UpdatedAt time.Time `xorm:"updated"`
 	DeletedAt time.Time `xorm:"deleted"`
 }
+
+func ConvertMedicalInfo(medical Medical) MedicalInfo {
+	return MedicalInfo{IdCard: medical.IdCard, FileHash: medical.FileHash}
+}

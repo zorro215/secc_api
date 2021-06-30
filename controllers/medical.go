@@ -2,8 +2,6 @@ package controllers
 
 import (
 	"bytes"
-	"encoding/json"
-	"fmt"
 	"io"
 	"log"
 	"secc_api/models"
@@ -16,30 +14,6 @@ import (
 // MedicalController Operations about medical
 type MedicalController struct {
 	beego.Controller
-}
-
-// Post @Title Create
-// @Description create medical
-// @Param	body		body 	models.Medical true		"The medical content"
-// @Success 200
-// @Failure 403 body is empty
-// @router / [post]
-func (o *MedicalController) Post() {
-	paramData := o.Ctx.Input.RequestBody
-	var m models.Medical
-	err1 := json.Unmarshal(paramData, &m)
-	if err1 != nil {
-		fmt.Println("json.Unmarshal is err1:", err1.Error())
-	} else {
-		service.AddMedical(m)
-	}
-	var md models.MedicalInfo
-	err2 := json.Unmarshal(paramData, &md)
-	if err2 != nil {
-		fmt.Println("json.Unmarshal is err2:", err2.Error())
-	} else {
-		service.SaveMedicalInfo(md)
-	}
 }
 
 // Get @Title Get
@@ -62,7 +36,8 @@ func (o *MedicalController) Get() {
 // @Failure 403 body is empty
 // @router /UploadFile [post]
 func (o *MedicalController) UploadFile() {
-	f, _, err := o.GetFile("uploadname")
+	f, _, err := o.GetFile("uploadName")
+	idCard := o.GetString("idCard")
 	if err != nil {
 		log.Fatal("getfile err ", err)
 	}
@@ -71,6 +46,8 @@ func (o *MedicalController) UploadFile() {
 	_, err = io.Copy(buf, f)
 	var hash string
 	hash, _, _ = tools.UploadToIpfs(buf.Bytes())
-	o.Data["string"] = hash
-	_ = o.ServeJSON()
+	m := models.Medical{IdCard: idCard, FileHash: hash, DataId: tools.Int64String(int64(tools.GetSonyFlakeID()))}
+	service.AddMedical(m)
+	md := models.ConvertMedicalInfo(m)
+	service.SaveMedicalInfo(md)
 }

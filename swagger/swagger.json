@@ -15,26 +15,26 @@
     },
     "basePath": "/v1",
     "paths": {
-        "/medical/": {
+        "/medical/UploadFile": {
             "post": {
                 "tags": [
                     "medical"
                 ],
-                "description": "create medical",
+                "description": "UploadFile",
                 "parameters": [
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "The medical content",
+                        "description": "The UploadFile content",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Medical"
+                            "$ref": "#/definitions/multipart.File"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": ""
+                        "description": "{string} hash"
                     },
                     "403": {
                         "description": "body is empty"
@@ -42,27 +42,27 @@
                 }
             }
         },
-        "/medical/{deviceNo}": {
+        "/medical/{idCard}": {
             "get": {
                 "tags": [
                     "medical"
                 ],
-                "description": "find medical by deviceNo",
+                "description": "find medical by idCard",
                 "parameters": [
                     {
                         "in": "path",
-                        "name": "deviceNo",
-                        "description": "the deviceNo you want to get",
+                        "name": "idCard",
+                        "description": "the idCard you want to get",
                         "required": true,
                         "type": "string"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "{medical} models.Object"
+                        "description": "{medical} models.Medical"
                     },
                     "403": {
-                        "description": ":deviceNo is empty"
+                        "description": ":idCard is empty"
                     }
                 }
             }
@@ -539,33 +539,6 @@
         }
     },
     "definitions": {
-        "models.Medical": {
-            "title": "Medical",
-            "type": "object",
-            "properties": {
-                "CreatedAt": {
-                    "type": "string",
-                    "format": "datetime"
-                },
-                "DataId": {
-                    "type": "string"
-                },
-                "DeletedAt": {
-                    "type": "string",
-                    "format": "datetime"
-                },
-                "FileHash": {
-                    "type": "string"
-                },
-                "IdCard": {
-                    "type": "string"
-                },
-                "UpdatedAt": {
-                    "type": "string",
-                    "format": "datetime"
-                }
-            }
-        },
         "models.Object": {
             "title": "Object",
             "type": "object",
@@ -719,6 +692,10 @@
                     "format": "datetime"
                 }
             }
+        },
+        "multipart.File": {
+            "title": "File",
+            "type": "object"
         }
     },
     "tags": [

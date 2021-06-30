@@ -9,17 +9,8 @@ func init() {
 
 	beego.GlobalControllerRouter["secc_api/controllers:MedicalController"] = append(beego.GlobalControllerRouter["secc_api/controllers:MedicalController"],
 		beego.ControllerComments{
-			Method:           "Post",
-			Router:           "/",
-			AllowHTTPMethods: []string{"post"},
-			MethodParams:     param.Make(),
-			Filters:          nil,
-			Params:           nil})
-
-	beego.GlobalControllerRouter["secc_api/controllers:MedicalController"] = append(beego.GlobalControllerRouter["secc_api/controllers:MedicalController"],
-		beego.ControllerComments{
 			Method:           "Get",
-			Router:           "/:deviceNo",
+			Router:           "/:idCard",
 			AllowHTTPMethods: []string{"get"},
 			MethodParams:     param.Make(),
 			Filters:          nil,
