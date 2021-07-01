@@ -32,7 +32,7 @@ func (o *MedicalController) Get() {
 // UploadFile @Title UploadFile
 // @Description UploadFile
 // @Param	body		body 	multipart.File true		"The UploadFile content"
-// @Success 200 {string} hash
+// @Success 200 {medical} models.Medical
 // @Failure 403 body is empty
 // @router /UploadFile [post]
 func (o *MedicalController) UploadFile() {

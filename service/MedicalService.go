@@ -8,7 +8,7 @@ import (
 func QueryMedical(idCard string) []models.Medical {
 	engine := tools.QueryEngine()
 	applies := make([]models.Medical, 0)
-	where := engine.Where("1=1")
+	where := engine.Where("1=1").Distinct("file_hash")
 	if idCard != "" {
 		where.And("id_card = ?", idCard)
 	}
