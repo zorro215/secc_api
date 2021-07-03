@@ -41,7 +41,7 @@ paths:
           $ref: '#/definitions/multipart.File'
       responses:
         "200":
-          description: '{string} hash'
+          description: '{medical} models.Medical'
         "403":
           description: body is empty
   /object/:

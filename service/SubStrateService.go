@@ -7,6 +7,14 @@ import (
 	"github.com/centrifuge/go-substrate-rpc-client/v3/types"
 )
 
+func getUploadKeyringPair() signature.KeyringPair {
+	return signature.KeyringPair{
+		URI:       "economy defy spend birth improve weather public absorb message merge fossil lens",
+		Address:   "5DniUHH4FRsdeJeDPDVXSt5Q76oPvYdyN1Pj1F9cTQuHH8Zp",
+		PublicKey: types.MustHexDecodeString("0x4c469b7d9606dda6588f99285aa734c4a9db895c4cb47a74df6705ccfb33d120"),
+	}
+}
+
 // CallMethod /**
 //调用substrate方法 默认使用Alice进行签名
 func CallMethod(method string, args ...interface{}) {
@@ -32,7 +40,7 @@ func CallMethod(method string, args ...interface{}) {
 		panic(err)
 	}
 
-	key, err := types.CreateStorageKey(meta, "System", "Account", signature.TestKeyringPairAlice.PublicKey)
+	key, err := types.CreateStorageKey(meta, "System", "Account", getUploadKeyringPair().PublicKey)
 	if err != nil {
 		panic(err)
 	}
@@ -54,7 +62,7 @@ func CallMethod(method string, args ...interface{}) {
 	}
 
 	// Sign the transaction using Alice's default account
-	err = ext.Sign(signature.TestKeyringPairAlice, o)
+	err = ext.Sign(getUploadKeyringPair(), o)
 	if err != nil {
 		panic(err)
 	}
