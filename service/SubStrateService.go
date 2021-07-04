@@ -40,7 +40,7 @@ func CallMethod(method string, args ...interface{}) {
 		panic(err)
 	}
 
-	key, err := types.CreateStorageKey(meta, "System", "Account", getUploadKeyringPair().PublicKey)
+	key, err := types.CreateStorageKey(meta, "System", "Account", signature.TestKeyringPairAlice.PublicKey)
 	if err != nil {
 		panic(err)
 	}
@@ -62,7 +62,7 @@ func CallMethod(method string, args ...interface{}) {
 	}
 
 	// Sign the transaction using Alice's default account
-	err = ext.Sign(getUploadKeyringPair(), o)
+	err = ext.Sign(signature.TestKeyringPairAlice, o)
 	if err != nil {
 		panic(err)
 	}
