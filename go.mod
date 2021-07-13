@@ -5,7 +5,11 @@ go 1.14
 require github.com/beego/beego/v2 v2.0.1
 
 require (
+	github.com/Azure/azure-sdk-for-go v55.5.0+incompatible // indirect
+	github.com/Azure/go-autorest/autorest/to v0.4.0 // indirect
+	github.com/Azure/go-autorest/autorest/validation v0.3.1 // indirect
 	github.com/centrifuge/go-substrate-rpc-client/v3 v3.0.2
+	github.com/fortytw2/leaktest v1.3.0 // indirect
 	github.com/go-sql-driver/mysql v1.5.0
 	github.com/go-xorm/xorm v0.7.9
 	github.com/ipfs/go-ipfs-api v0.2.0
@@ -13,5 +17,6 @@ require (
 	github.com/sony/sonyflake v1.0.0
 	gopkg.in/alexcesaro/quotedprintable.v3 v3.0.0-20150716171945-2caba252f4dc // indirect
 	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df
+	pack.ag/amqp v0.12.5
 	xorm.io/core v0.7.3
 )
